@@ -3,7 +3,7 @@ const path = require('path');
 const readData = require('./helpers/readData');
 const addToData = require('./helpers/addToData');
 const deleteFromData = require('./helpers/deleteFromData');
-const uuid = require('./helpers/uuid');
+const { v4 : uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = 3001;
@@ -27,7 +27,7 @@ app.post('/api/notes', (req, res) => {
     const newNote = {
         title, 
         text,
-        id: uuid()
+        id: uuidv4()
     }
 
     addToData(newNote).then(() => {
