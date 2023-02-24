@@ -14,7 +14,12 @@ const readFromFile = util.promisify(fs.readFile);
  *  @param {object} content The content you want to write to the file
  *  @returns {void} Nothing
  */
-const writeToFile = (destination, content) => fs.writeFile(destination, JSON.stringify(content, null, 4));
+const writeToFile = (destination, content) => 
+  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) => {
+    if(err){
+      console.error(err);
+    }
+  });
 
 /**
  *  Function to read data from a given a file and append some content
