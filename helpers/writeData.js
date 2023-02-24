@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-function updateData(newData){
+function writeData(newData){
     fs.writeFile('./db/db.json', JSON.stringify(newData, null, 2), (err) => {
         if(err){
             console.log(err);
-        }}
-    )
+        }
+    });
 }
 
-module.exports = updateData;
+module.exports = writeData;
