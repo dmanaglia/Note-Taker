@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const notesData = require('./db/db.json');
+const readData = require('./helpers/readData');
 const addToData = require('./helpers/addToData');
-const deleteFromData = require('./helpers/deleteFromData')
+const deleteFromData = require('./helpers/deleteFromData');
 const uuid = require('./helpers/uuid');
 
 const app = express();
@@ -17,7 +17,9 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    res.json(notesData);
+    readData('./db/db.json').then((data) => {
+        res.json(JSON.parse(data));
+    })
 });
 
 app.post('/api/notes', (req, res) => {
@@ -27,11 +29,16 @@ app.post('/api/notes', (req, res) => {
         text,
         id: uuid()
     }
-    addToData(newNote);
+
+    addToData(newNote).then(() => {
+        res.json("success");
+    })
 });
 
 app.delete('/api/notes/:id', (req, res) => {
-    deleteFromData(req.params.id);
+    deleteFromData(req.params.id).then(() => {
+        res.json("success");
+    })
 });
 
 app.get('*', (req, res) => {
