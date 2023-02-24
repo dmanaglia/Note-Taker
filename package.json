@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/dmanaglia/Note-Taker#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "uuid": "^9.0.0"
   }
 }
